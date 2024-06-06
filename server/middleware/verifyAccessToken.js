@@ -7,12 +7,12 @@ function verifyAccessToken(req, res, next) {
         const { user } = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
     
         res.locals.user = user;
-    
+     
         next();
       } catch (error) {
         console.log('Invalid access token');
         res.status(403).send('Invalid access token');
-      }
+      } 
     
 }
 
