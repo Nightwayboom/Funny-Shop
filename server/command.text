@@ -1,0 +1,7 @@
+npx sequelize-cli model:generate --name User --attributes name:string,login:string,email:string,password:string,isAdmin:boolean
+npx sequelize-cli model:generate --name Card --attributes name:string,img:string,price:integer
+npx sequelize-cli model:generate --name Basket --attributes cardId:integer,userId:integer
+
+npx sequelize-cli seed:generate --name users
+npx sequelize-cli seed:generate --name cards
+npx sequelize-cli seed:generate --name baskets
