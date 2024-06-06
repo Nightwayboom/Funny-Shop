@@ -1,5 +1,5 @@
 
-import { newResponseUser } from "./app.type";
+import { newResponseUser, signUpFormType } from "./app.type";
 import axiosInstance from "../axiosInstance";
 
 export async function loadUser(): Promise<newResponseUser> {
@@ -7,16 +7,10 @@ export async function loadUser(): Promise<newResponseUser> {
     return result.data
 }
 
+export async function regUser(event:any, signUpForm:signUpFormType): Promise<newResponseUser> {
+    event.preventDefault()
 
-// async function loadUser (): Promise<{newUsersType}> {
-//     try {
-//       await axiosInstance.get('/token/refresh').then(data => {
-//         console.log(data)
-//         const { accessToken, user } = data.data
-//         setUser(user)
-//         SetAccessToken(accessToken)
-//       })
-//     } catch ({message}) {
-//       return console.log(message);
-//     }
-//   }
+    const result = await axiosInstance.post('/auth/registration', signUpForm)
+    return result.data
+
+}
