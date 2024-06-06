@@ -26,3 +26,7 @@ export type signUpFormType = {
     isAdmin: string
   }
 
+  export type signInFormType = {
+    email: string,
+    password: string,
+  }

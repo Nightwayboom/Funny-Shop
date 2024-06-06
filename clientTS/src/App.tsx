@@ -7,8 +7,7 @@ import { loadUser } from './components/api';
 import Layout from './pages/Layout';
 import MainPage from './pages/MainPage'
 import SignUp from './pages/SignUp'
-// import SignIn from './pages/SignIn'
-// import axiosInstance from './axiosInstance'
+import SignIn from './pages/SignIn';
 
 function App() : JSX.Element {
   const [user, setUser] = useState<newUsersType>(null)
@@ -35,10 +34,10 @@ function App() : JSX.Element {
           path: 'signup',
           element: <SignUp user={user} setUser={setUser}/>,
         },
-        // {
-        //   path: 'signin',
-        //   element: <SignIn user={user} setUser={setUser}/>,
-        // }
+        {
+          path: 'signin',
+          element: <SignIn user={user} setUser={setUser}/>,
+        }
       ],
     },
   ])
