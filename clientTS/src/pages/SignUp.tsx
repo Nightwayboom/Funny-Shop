@@ -26,7 +26,7 @@ export default function SignUp({setUser }: UserProps) : JSX.Element  {
     email: '',
     password: '',
     isAdmin: ''
-  })
+  }) 
 
   type CurrentType = {
     id :number,
