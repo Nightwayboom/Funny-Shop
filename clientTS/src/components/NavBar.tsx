@@ -20,7 +20,7 @@ import { UserProps } from './app.type'
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 
-function NavBar({ user, setUser }:UserProps) {
+function NavBar({ user, setUser }:UserProps) : JSX.Element {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 

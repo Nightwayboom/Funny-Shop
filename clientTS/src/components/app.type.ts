@@ -14,7 +14,15 @@ export type newResponseUser = {
 }
 
 export type UserProps = {
-    user: newUsersType,
+    user: newUsersType | undefined,
     setUser : Dispatch<SetStateAction<newUsersType>>
 }
+
+export type signUpFormType = {
+    name: string,
+    login: string,
+    email: string,
+    password: string,
+    isAdmin: string
+  }
 

@@ -20,7 +20,7 @@ function Copyright() {
 }
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
-export default function ErrorPage() {
+export default function ErrorPage() : JSX.Element {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
