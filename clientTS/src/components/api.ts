@@ -1,5 +1,5 @@
 
-import { newResponseUser, signInFormType, signUpFormType } from "./app.type";
+import { newCardType, newResponseUser, signInFormType, signUpFormType } from "./app.type";
 import axiosInstance from "../axiosInstance";
 
 export async function loadUser(): Promise<newResponseUser> {
@@ -19,5 +19,9 @@ export async function logUser(event:any, signInForm:signInFormType): Promise<new
     event.preventDefault()
     const result = await axiosInstance.post('/auth/login', signInForm)
     return result.data
+}
 
+export async function loadCard(): Promise<newCardType[]> {
+    const result = await axiosInstance.get('/cards')
+    return result.data
 }
