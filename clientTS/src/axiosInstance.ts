@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { type AxiosError } from "axios";
+
 const axiosInstance = axios.create({
   baseURL: "/api",
   withCredentials: true,
@@ -6,29 +7,27 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
-let accessToken = '';
-function SetAccessToken(token:string) {
+let accessToken : string = '';
+function SetAccessToken(token:string) : void {
   accessToken = token;
 }
 /// В каждый запрос добавляет заголовок Authorization
-axiosInstance.interceptors.request.use((config) => {
-  if (!config.headers.Authorization) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  }
-  return config;
-});
 axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const prevRequest = error.config;
-    if (error.response.status === 403 && !prevRequest.sent) {
-      const response = await axios('/api/token/refresh');
-      accessToken = response.data.accessToken;
+  (res) => res,
+  async (err: AxiosError & { config: { sent?: boolean; url?: string } }) => {
+    const prevRequest = err.config; 
+    if (prevRequest.url?.endsWith('/tokens/refresh')) {
+      return Promise.reject(err);
+    }
+    if (err.response?.status === 403 && !prevRequest.sent) {
       prevRequest.sent = true;
+      const {
+        data: { accessToken },
+      } = await axiosInstance<ResponseType>('/tokens/refresh');
       prevRequest.headers.Authorization = `Bearer ${accessToken}`;
       return axiosInstance(prevRequest);
     }
-    return Promise.reject(error);
+    return Promise.reject(err);
   },
 );
 export { SetAccessToken };
