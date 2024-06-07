@@ -42,7 +42,7 @@ export default function SignIn({setUser}: UserProps): JSX.Element {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'gray' }} src="../../public/Batman.svg">
+          <Avatar sx={{ m: 1, bgcolor: 'gray', width: 52, height: 52 }} src="../../public/Batman.svg">
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

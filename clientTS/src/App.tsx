@@ -28,7 +28,7 @@ function App() : JSX.Element {
       children: [
         {
           path: '/',
-          element: <MainPage user = {user} setUser={setUser} />,
+          element: <MainPage user={user}/>,
         },
         {
           path: 'signup',
