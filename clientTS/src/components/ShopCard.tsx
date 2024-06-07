@@ -16,7 +16,7 @@ import { red } from '@mui/material/colors'
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 // import MoreVertIcon from '@mui/icons-material/MoreVert'
 import axiosInstance from '../axiosInstance'
-import { newCardType } from './app.type'
+import type { newCardType } from './app.type'
 
 // const ExpandMore = styled(props => {
 // 	const { expand, ...other } = props

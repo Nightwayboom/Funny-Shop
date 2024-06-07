@@ -1,7 +1,7 @@
-
-import { newCardType, newResponseUser, signInFormType, signUpFormType } from "./app.type";
+import type { AxiosResponse } from "axios";
+import type { newCardType, newResponseUser, signInFormType, signUpFormType } from "./app.type";
 import axiosInstance from "../axiosInstance";
-import { AxiosResponse } from "axios";
+
 
 export async function loadUser(): Promise<newResponseUser> {
     const result : AxiosResponse<newResponseUser> = await axiosInstance.get('/token/refresh')
