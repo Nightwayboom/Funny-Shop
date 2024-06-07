@@ -16,6 +16,7 @@ import { red } from '@mui/material/colors'
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 // import MoreVertIcon from '@mui/icons-material/MoreVert'
 import axiosInstance from '../axiosInstance'
+import { newCardType, newUsersType } from './app.type'
 
 // const ExpandMore = styled(props => {
 // 	const { expand, ...other } = props
@@ -28,12 +29,19 @@ import axiosInstance from '../axiosInstance'
 // 	}),
 // }))
 
-export default function ShopCard({ card, user, setCards, cards }) {
+type ShopCardPropsType = {
+	card: newCardType,
+	
+	setCards: React.Dispatch<React.SetStateAction<newCardType>>,
+	cards: newCardType[],
+}
+
+
+export default function ShopCard({ card, setCards, cards } : ShopCardPropsType ) : JSX.Element {
 	const [expanded, setExpanded] = React.useState(false)
 
-	async function deleteCard() {
+	async function deleteCard(): Promise<void> {
 		const response = await axiosInstance.delete(`/cards/${card.id}`)
-		console.log(response)
 		if (response.data) {
 			console.log('Удалено')
 			const newCard = cards.filter(nCard => nCard?.id !== card.id)

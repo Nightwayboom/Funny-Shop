@@ -99,7 +99,7 @@ function MainPage({user}: UserPropsWithoutSetUser) {
 			>
 				{cards &&
 					cards.map(card => {
-						return <ShopCard key={card.id} card={card} user={user} cards={cards} setCards={setCards} />
+						return <ShopCard key={card.id} card={card} cards={cards} setCards={setCards} />
 					})}
 			</div>
 		</>
