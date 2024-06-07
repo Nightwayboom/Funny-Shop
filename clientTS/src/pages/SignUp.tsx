@@ -13,8 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { SetAccessToken } from '../../src/axiosInstance'
-import { UserProps } from '../components/app.type'
+import { SetAccessToken } from '../axiosInstance'
+import type { UserProps } from '../components/app.type'
 import { regUser } from '../components/api'
 
 const defaultTheme = createTheme()
@@ -46,7 +46,7 @@ export default function SignUp({setUser }: UserProps) : JSX.Element  {
     },
   ]
 
-  const handleSubmit = async (event:any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     regUser(event, signUpForm).then((data) => {
         setUser(data.user)
         SetAccessToken(data.accessToken)
@@ -75,7 +75,7 @@ export default function SignUp({setUser }: UserProps) : JSX.Element  {
           <Typography component='h1' variant='h5'>
             Регистрация
           </Typography>
-          <Box component='form'  onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component='form'  onSubmit={void handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

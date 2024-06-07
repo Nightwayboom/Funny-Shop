@@ -15,39 +15,45 @@ import AdbIcon from '@mui/icons-material/CurrencyBitcoin'
 // import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance, { SetAccessToken } from '../axiosInstance'
-import { UserProps } from './app.type'
+import type { UserProps } from './app.type'
 // const pages = ['Главная', 'Pricing', 'Blog']
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 
 function NavBar({ user, setUser }:UserProps) : JSX.Element {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = React.useState <null | HTMLButtonElement> (null)
+  const [anchorElUser, setAnchorElUser] = React.useState <null | HTMLButtonElement> (null)
 
 
-  const handleOpenNavMenu = (event : any)  => {
+  const handleOpenNavMenu = ((event :  React.MouseEvent<HTMLButtonElement, MouseEvent>): void  => 
     setAnchorElNav(event.currentTarget)
-  }
-  const handleOpenUserMenu = (event : any) => {
+  )
+  const handleOpenUserMenu = (event : React.MouseEvent<HTMLButtonElement, MouseEvent>) : void => {
     setAnchorElUser(event.currentTarget)
   }
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = () : void => {
     setAnchorElNav(null)
   }
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = () : void => {
     setAnchorElUser(null)
   }
   const navigate = useNavigate()
-  async function handleEditClick(data:string){
+  async function handleEditClick(data:string) : Promise<void> {
     switch (data) {
       case 'Profile':
         navigate('/profile')
         break
       case 'Logout':
         await axiosInstance.get('/auth/logout')
-        setUser(null)
-        SetAccessToken('')
+        .then(()=> {
+          setUser(null)
+          SetAccessToken('')
         window.location.href = '/'
+        })
+        .catch(console.error);
+        
+      
+        
         break
       case 'Home':
         navigate('/')
@@ -108,8 +114,8 @@ function NavBar({ user, setUser }:UserProps) : JSX.Element {
               }}
             >
               <MenuItem
-                onClick={() => {
-                  handleEditClick('Home'), handleCloseNavMenu
+                onClick={() : void => {
+                  handleEditClick('Home'), handleCloseNavMenu 
                 }}
               >
                 <Typography textAlign='center'>Главная</Typography>
@@ -177,10 +183,10 @@ function NavBar({ user, setUser }:UserProps) : JSX.Element {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <MenuItem onClick={() => handleEditClick('Profile')}>
+                  <MenuItem onClick={() => void handleEditClick('Profile')}>
                     <Typography textAlign='center'>Профиль</Typography>
                   </MenuItem>
-                  <MenuItem onClick={() => handleEditClick('Logout')}>
+                  <MenuItem onClick={() => void handleEditClick('Logout')}>
                     <Typography textAlign='center'>Выйти</Typography>
                   </MenuItem>
                 </Menu>
