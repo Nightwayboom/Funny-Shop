@@ -16,7 +16,7 @@ import { red } from '@mui/material/colors'
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 // import MoreVertIcon from '@mui/icons-material/MoreVert'
 import axiosInstance from '../axiosInstance'
-import { newCardType, newUsersType } from './app.type'
+import { newCardType } from './app.type'
 
 // const ExpandMore = styled(props => {
 // 	const { expand, ...other } = props
@@ -32,13 +32,13 @@ import { newCardType, newUsersType } from './app.type'
 type ShopCardPropsType = {
 	card: newCardType,
 	
-	setCards: React.Dispatch<React.SetStateAction<newCardType>>,
+	setCards: React.Dispatch<React.SetStateAction<newCardType[]>>,
 	cards: newCardType[],
 }
 
 
 export default function ShopCard({ card, setCards, cards } : ShopCardPropsType ) : JSX.Element {
-	const [expanded, setExpanded] = React.useState(false)
+	// const [expanded, setExpanded] = React.useState(false)
 
 	async function deleteCard(): Promise<void> {
 		const response = await axiosInstance.delete(`/cards/${card.id}`)
@@ -51,19 +51,18 @@ export default function ShopCard({ card, setCards, cards } : ShopCardPropsType )
 		}
 	}
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded)
-	}
+	// const handleExpandClick = () : void => {
+	// 	setExpanded(!expanded)
+	// }
 
 	return (
 		<Card sx={{ maxWidth: 345, marginBottom: '15px' }}>
 			<CardHeader
 				avatar={
-					<Avatar sx={{ bgcolor: red[900] }} aria-label='recipe'>
-					</Avatar>
+					<Avatar sx={{ bgcolor: red[900] }} aria-label='recipe'/>
+					// </Avatar>
 				}
 				title={card.name} // название
-				subheader={card.createdAt} // время добавления
 			/>
 			<CardMedia
 				component='img'
@@ -84,7 +83,7 @@ export default function ShopCard({ card, setCards, cards } : ShopCardPropsType )
 				>
 					Изменить
 				</Button>
-				<Button color='error' variant='outlined' onClick={() => deleteCard()}>
+				<Button color='error' variant='outlined' onClick={() => void deleteCard()}>
 					Удалить
 				</Button>
 			</CardActions>
